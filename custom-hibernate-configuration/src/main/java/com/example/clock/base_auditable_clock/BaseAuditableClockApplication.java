@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
@@ -21,6 +22,7 @@ public class BaseAuditableClockApplication {
 	}
 
 	@Bean
+	@Profile("!test")
 	Clock clock() {
 		return Clock.system(ZoneId.of("America/New_York"));
 	}

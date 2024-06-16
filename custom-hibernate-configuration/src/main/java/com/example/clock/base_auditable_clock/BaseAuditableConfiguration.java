@@ -2,22 +2,15 @@ package com.example.clock.base_auditable_clock;
 
 import java.time.Clock;
 import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.sql.DataSource;
 
 import org.hibernate.CallbackException;
 import org.hibernate.Interceptor;
 import org.hibernate.type.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
-import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 @Configuration
 public class BaseAuditableConfiguration {
