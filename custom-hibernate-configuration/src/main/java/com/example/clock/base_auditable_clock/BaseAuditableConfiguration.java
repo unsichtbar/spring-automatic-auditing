@@ -30,8 +30,29 @@ public class BaseAuditableConfiguration {
     public Interceptor hibernateInterceptor() {
         return new Interceptor() {
             @Override
+            public boolean onFlushDirty(Object entity, Object id, Object[] currentState, Object[] previousState,
+                    String[] propertyNames, Type[] types) throws CallbackException {
+                // TODO Auto-generated method stub
+               
+                if (entity instanceof BaseAuditable auditable) {
+                    Instant now = Instant.now(clock);
+                    auditable.setLastUpdatedOn(now);
+                    auditable.setLastUpdatedBy("ALEX");
+                    if (auditable.getCreatedOn() == null) {
+                        auditable.setCreatedOn(now);
+                    }
+                    if (auditable.getCreatedBy() == null) {
+                        auditable.setCreatedBy("ALEX");
+                    }
+                }
+                return Interceptor.super.onFlushDirty(entity, id, currentState, previousState, propertyNames, types);
+            
+            }
+
+            @Override
             public boolean onSave(Object entity, Object id, Object[] state, String[] propertyNames, Type[] types)
                     throws CallbackException {
+                                 
                 if (entity instanceof BaseAuditable auditable) {
                     Instant now = Instant.now(clock);
                     auditable.setLastUpdatedOn(now);
